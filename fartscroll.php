@@ -20,7 +20,9 @@
  * @license    https://opensource.org/licenses/MIT  The MIT License
  */
 
-if (!defined('_PS_VERSION_')) exit;
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class FartScroll extends Module
 {
