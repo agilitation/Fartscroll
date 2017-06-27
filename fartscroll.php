@@ -59,7 +59,7 @@ class FartScroll extends Module
         $this->context->controller->registerJavascript(
             'modules-fartscroll',
             'modules/'.$this->name.'/views/js/fartscroll.js',
-            ['position' => 'top', 'priority' => 0]
+            array('position' => 'bottom', 'priority' => 150)
         );
         return $this->display(__FILE__, 'views/templates/front/fartscroll.tpl');
 	}
