@@ -15,48 +15,52 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- *  @author Agilitation <hello@agilitation.fr>
- *  @copyright  2017 Agilitation
- *  @license    https://opensource.org/licenses/MIT  The MIT License
+ * @author Agilitation <hello@agilitation.fr>
+ * @copyright  2017 Agilitation
+ * @license    https://opensource.org/licenses/MIT  The MIT License
  */
 
-if (!defined('_PS_VERSION_'))
-	exit;
+if (!defined('_PS_VERSION_')) exit;
 
 class FartScroll extends Module
 {
-	public function __construct()
-	{
-		$this->name = 'fartscroll';
-		$this->tab = 'front_office_features';
-		$this->version = '1.0.0';
-		$this->author = 'Agilitation';
-		$this->need_instance = 0;
-		parent::__construct();
-		$this->displayName = $this->trans('Fartscroll', array(), 'Modules.Fartscroll.Admin');
-		$this->description = $this->trans('A Prestashop implementation of TheOnion’s Fartscroll.js most elegant piece of software.', array(), 'Modules.Fartscroll.Admin');
-		$this->ps_versions_compliancy = array('min' => '1.7.1.0', 'max' => _PS_VERSION_);
+    public function __construct()
+    {
+        $this->name = 'fartscroll';
+        $this->tab = 'front_office_features';
+        $this->version = '1.0.0';
+        $this->author = 'Agilitation';
+        $this->need_instance = 0;
+        parent::__construct();
+        $this->displayName = $this->trans('Fartscroll', array(), 'Modules.Fartscroll.Admin');
+        $this->description = $this->trans(
+            'A Prestashop implementation of TheOnion’s Fartscroll.js most elegant piece of software.',
+            array(),
+            'Modules.Fartscroll.Admin'
+        );
+        $this->ps_versions_compliancy = array('min' => '1.7.1.0', 'max' => _PS_VERSION_);
     }
 
-	public function install()
+    public function install()
     {
-		if (!parent::install() || !$this->registerHook('displayHeader'))
-			return false;
-		return true;
-	}
+        if (!parent::install() || !$this->registerHook('displayHeader')) {
+            return false;
+        }
+        return true;
+    }
 
-	public function uninstall()
-	{
-		return parent::uninstall();
-	}
+    public function uninstall()
+    {
+        return parent::uninstall();
+    }
 
-	public function hookDisplayHeader($params)
-	{
+    public function hookDisplayHeader($params)
+    {
         $this->context->controller->registerJavascript(
             'modules-fartscroll',
-            'modules/'.$this->name.'/views/js/fartscroll.js',
+            'modules/' . $this->name . '/views/js/fartscroll.js',
             array('position' => 'bottom', 'priority' => 150)
         );
         return $this->display(__FILE__, 'views/templates/front/fartscroll.tpl');
-	}
+    }
 }
